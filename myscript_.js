@@ -43,12 +43,48 @@ function loadData(){
 
                 img.src = author.picture.medium;
                 span.innerHTML = `${author.name.first} ${author.name.last}`;
+
+                let button2 = createNode('button');
+                button2.id = "expand";
+                button2.innerHTML = "Expand";
+
+                let ul2 = createNode('ul');
+                button2.addEventListener('click', ()=>{
+                        let title = createNode('p');
+                        title.innerHTML = "Data";
+                        span.innerHTML = "";
+                        append(ul2, title);
+
+                        let name = createNode('li');
+                        name.innerHTML = `Name: ${author.name.first} ${author.name.last}`
+                        append(ul2, name);
+
+                        let gender = createNode('li');
+                        gender.innerHTML = "Gender: " + author.gender;
+                        append(ul2, gender);
+
+                        let country = createNode('li');
+                        country.innerHTML = "Country: " + author.location.country;
+                        append(ul2, country);
+
+                        let email = createNode('li');
+                        email.innerHTML = "E-Mail: " + author.email;
+                        append(ul2, email);
+
+                        append(span, ul2);
+
+                        button2.innerHTML = "Collapse";
+                        flag = 1;
+                })
+
                 append(li, img);
                 append(li, span);
+                
+                append(li, button2);
                 append(ul, li);
             });
         });
     }).catch(function (error) {
-        console.log(">>"+error);
+        console.log(">>" + error);
     })
 }
