@@ -21,6 +21,33 @@ function loadData(){
         span.innerHTML = JSON.stringify(data, null, ' ');
         append(li, span);
         append(ul, li);
+
+        var button = document.getElementById("makePretty");
+
+        if (button) {
+            container.removeChild(button);
+        }
+
+        button = createNode('button');
+        button.id = "makePretty";
+        button.innerHTML = "Make pretty";
+        append(container, button);
+
+        button.addEventListener('click', ()=>{
+            ul.innerHTML = "";
+            let authorsData = data.results;
+            authorsData.map(function(author) {
+                let li = createNode('li');
+                let img = createNode('img');
+                let span = createNode('span');
+
+                img.src = author.picture.medium;
+                span.innerHTML = `${author.name.first} ${author.name.last}`;
+                append(li, img);
+                append(li, span);
+                append(ul, li);
+            });
+        });
     }).catch(function (error) {
         console.log(">>"+error);
     })
